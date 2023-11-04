@@ -8,12 +8,13 @@ namespace vizualizacao_saldo
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage ="Obrigatório informar o saldo atual! ")]
+
+        [Required(ErrorMessage ="Obrigatório informar o valor! ")]
         public int Valor { get; set; }
 
         public string Resumo { get; set; }
 
-        [Required(ErrorMessage = "Obrigatório informar o tipo de saldo! ")]
+        [Required(ErrorMessage = "Obrigatório informar o tipo de saldo!")]
         public string Tipo_Saldo { get; set; }
     }
 }
