@@ -114,6 +114,7 @@ namespace mf_dev_backend_2023.Controllers
             return RedirectToAction("Index");
         }
 
+        // criação do exportar para Excel, linhas e colunas, em return File foi adicionado um link que será o download Excel.
         public IActionResult Exportar()
         {
             var dados = GetDados();
@@ -130,7 +131,7 @@ namespace mf_dev_backend_2023.Controllers
 
             }
         }
-        
+        // Colunas e linhas adicionadas para a exportação do relatório em Excel
         private DataTable GetDados()
         {
             DataTable dataTable = new DataTable();
