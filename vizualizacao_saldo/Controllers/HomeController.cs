@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Visualização_Saldo.Models;
 
-namespace Visualização_Saldo.Controllers
+namespace vizualizacao_saldo.Controllers
 {
     public class HomeController : Controller
     {
