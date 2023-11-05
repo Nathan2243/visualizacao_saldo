@@ -15,6 +15,7 @@ namespace vizualizacao_saldo
         public string Resumo { get; set; }
 
         [Required(ErrorMessage = "Obrigatório informar o tipo de saldo!")]
+        [Display(Name = "Tipo de Despesa")]
         public string Tipo_Saldo { get; set; }
     }
 }

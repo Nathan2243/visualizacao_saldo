@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vizualizacao_saldo;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Data;
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace mf_dev_backend_2023.Controllers
 {
@@ -111,6 +114,47 @@ namespace mf_dev_backend_2023.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Exportar()
+        {
+            var dados = GetDados();
+
+            using (XLWorkbook workBook = new XLWorkbook())
+            {
+                workBook.AddWorksheet(dados,"Relatório de Despesas");
+
+                using (MemoryStream ms = new MemoryStream()) 
+                {
+                    workBook.SaveAs(ms);
+                    return File(ms.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Cadastro_Despesa.xls");
+                }
+
+            }
+        }
+        
+        private DataTable GetDados()
+        {
+            DataTable dataTable = new DataTable();
+
+            dataTable.TableName = "Dados Saldos";
+            dataTable.Columns.Add("Valor", typeof(int));
+            dataTable.Columns.Add("Resumo", typeof(string));
+            dataTable.Columns.Add("Tipo_Saldo", typeof(string));
+
+            var dados = _context.Saldos.ToList();
+            
+            if(dados.Count > 0)
+            {
+                dados.ForEach(Despesas =>
+                {
+                    dataTable.Rows.Add(Despesas.Valor, Despesas.Resumo, Despesas.Tipo_Saldo);
+                });
+            }
+
+
+
+            return dataTable;
+
+        }
 
 
     }
